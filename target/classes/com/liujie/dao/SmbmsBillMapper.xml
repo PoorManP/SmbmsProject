@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liujie.dao.SmbmsBillMapper">
+
+  <resultMap id="BaseResultMap" type="com.liujie.model.SmbmsBill">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="billCode"  property="billCode" />
+    <result column="productName"  property="productName" />
+    <result column="productDesc"  property="productDesc" />
+    <result column="productUnit"  property="productUnit" />
+    <result column="productCount"  property="productCount" />
+    <result column="totalPrice" property="totalPrice" />
+    <result column="isPayment"  property="isPayment" />
+    <result column="createdBy"  property="createdBy" />
+    <result column="creationDate"  property="creationDate" />
+    <result column="modifyBy"  property="modifyBy" />
+    <result column="modifyDate"  property="modifyDate" />
+    <result column="providerId"  property="providerId" />
+      <association property="smbmsProviderModel" javaType="com.liujie.model.SmbmsProviderModel">
+          <result property="proPhone" column="proPhone"></result>
+          <result property="proName" column="proName"></result>
+          <result property="proCode" column="proCode"></result>
+      </association>
+  </resultMap>
+<!--  -->
+<!--  <resultMap id="extendResult" type="com.liujie.model.SmbmsBill" extends="BaseResultMap">-->
+
+<!--  </resultMap>-->
+
+
+  <select id="selectByProviderInfo" resultMap="BaseResultMap">
+      SELECT
+        b.billCode as billCode,
+        b.productName productName,
+        p.proCode,
+        p.proName,
+        p.proPhone
+      FROM smbms_bill b join smbms_provider p on b.providerid=p.id
+
+      <trim prefix="where"  suffixOverrides="and">
+      <if test="productName!=null or productName!=''">
+            b.productName like '%' #{productName} '%' and b.isPayment>0
+        </if>
+
+        <if test="id!=null and id !=''">
+            and p.id=#{id}
+        </if>
+
+        <if test="isPay!=null and isPay !=''">
+            and b.isPlayment = #{isPay}
+        </if>
+
+
+      </trim>
+
+  </select>
+
+
+    <select id="test" resultType="com.liujie.model.SmbmsBill">
+        select * from smbms_bill where productName like '%' #{productName} '%'
+    </select>
+
+</mapper>

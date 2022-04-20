@@ -40,7 +40,7 @@ public class App {
         SmbmsUserMapper mapper = session.getMapper(SmbmsUserMapper.class);
 
 
-        String[] ids = new String[]{"1","2"};
+        String[] ids = new String[]{"1","2","3"};
 
 
         List<SmbmsUser> smbmsUsers = mapper.selectByIds(ids);

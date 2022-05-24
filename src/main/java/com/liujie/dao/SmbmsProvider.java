@@ -4,6 +4,7 @@ import com.liujie.model.SmbmsProviderModel;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 //dao这个包是对数据库进行操作的
 
@@ -31,6 +32,8 @@ public interface SmbmsProvider {
 
     int deleteById(String id);
 
+
+    List<SmbmsProviderModel> getProviderLimit(Map<String,String[]> map);
 
 
 }

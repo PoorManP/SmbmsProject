@@ -30,7 +30,6 @@
         <result property="modifyDate" column="modifydate"/>
         <result property="userId" column="userid"/>
       </collection>
-
   </resultMap>
 
   <select id="selectAdress" resultMap="AddressMap">
@@ -230,5 +229,12 @@
     <foreach collection="array" separator="," item="id" open="(" close=")">
       #{id}
     </foreach>
+
+
+  </select>
+
+
+  <select id="login" resultType="com.liujie.model.SmbmsUser">
+    select  * from smbms_user where userCode = #{userCode} and userPassword = #{userPassword}
   </select>
 </mapper>

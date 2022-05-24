@@ -8,9 +8,9 @@
   <artifactId>mybatisTest</artifactId>
   <version>1.0.0</version>
 
-  <name>mybatisTest</name>
+  <name>Smbms</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <packaging>war</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,26 +19,91 @@
   </properties>
 
   <dependencies>
+
+    <!--    标准标签库-->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>jstl-api</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
     </dependency>
 
 
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+
+    <!-- jsp依赖 -->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.2.1-b03</version>
+      <scope>provided</scope>
+    </dependency>
+    <!--    springmvc-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>5.2.5.RELEASE</version>
+    </dependency>
+    <!--   事务 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>5.2.5.RELEASE</version>
+    </dependency>
+    <!--    Spring JDBC是一个使编写JDBC代码更容易的库-->
+    <dependency>
+      <!--      spring集成jdbc-->
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>5.2.5.RELEASE</version>
+    </dependency>
+    <!--    jakon 依赖-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+
+    <!--    mybatis整合spring依赖-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <!--    mybatis依赖-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
       <version>3.5.5</version>
     </dependency>
-
+    <!--    jdbc依赖-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.6</version>
     </dependency>
-
+    <!--    druid连接池依赖-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.12</version>
+    </dependency>
+    <!--    切面依赖-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>5.2.5.RELEASE</version>
+    </dependency>
   </dependencies>
 
   <build>

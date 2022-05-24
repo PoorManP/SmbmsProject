@@ -22,10 +22,33 @@
           <result property="proCode" column="proCode"></result>
       </association>
   </resultMap>
+
+    <resultMap id="queryPname" type="com.liujie.model.SmbmsBill">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="billCode"  property="billCode" />
+        <result column="productName"  property="productName" />
+        <result column="productDesc"  property="productDesc" />
+        <result column="productUnit"  property="productUnit" />
+        <result column="productCount"  property="productCount" />
+        <result column="totalPrice" property="totalPrice" />
+        <result column="isPayment"  property="isPayment" />
+        <result column="createdBy"  property="createdBy" />
+        <result column="creationDate"  property="creationDate" />
+        <result column="modifyBy"  property="modifyBy" />
+        <result column="modifyDate"  property="modifyDate" />
+        <result column="providerId"  property="providerId" />
+    </resultMap>
 <!--  -->
 <!--  <resultMap id="extendResult" type="com.liujie.model.SmbmsBill" extends="BaseResultMap">-->
 
 <!--  </resultMap>-->
+
+<!--订单编码、商品名称、供应商名称、账单金额、是否付款、创建时间 -->
+    <select id="queryByName" resultMap="queryPname">
+        select billCode,productName,productCount,isPayment,creationDate from smbms_bill
+        where productName like '%' #{pname} '%'
+    </select>
+
 
 
   <select id="selectByProviderInfo" resultMap="BaseResultMap">

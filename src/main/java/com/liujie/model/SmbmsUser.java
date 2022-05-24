@@ -146,4 +146,24 @@ public class SmbmsUser {
     public void setListAddress(List<SmbmsAddress> listAddress) {
         this.listAddress = listAddress;
     }
+
+    @Override
+    public String toString() {
+        return "SmbmsUser{" +
+                "id=" + id +
+                ", userCode='" + userCode + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", gender=" + gender +
+                ", birthDay=" + birthDay +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", userRole=" + userRole +
+                ", createdBy=" + createdBy +
+                ", creationDate=" + creationDate +
+                ", modifyBy=" + modifyBy +
+                ", modifyDate=" + modifyDate +
+                ", listAddress=" + listAddress +
+                '}';
+    }
 }

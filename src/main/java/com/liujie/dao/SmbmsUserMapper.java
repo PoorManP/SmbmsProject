@@ -20,4 +20,25 @@ public interface SmbmsUserMapper {
     SmbmsUser selectAddressById(Integer id);
 
     List<SmbmsUser> selectByIds(String[] id);
+
+    SmbmsUser login(SmbmsUser user);
+
+    /**
+     * <select id="listProduct" resultType="Product">
+     * SELECT * FROM product_
+     * <where>
+     * <choose>
+     * <when test="name != null">
+     * and name like concat('%',#{name},'%')
+     * </when>
+     * <when test="price !=null and price != 0">
+     * and price > #{price}
+     * </when>
+     * <otherwise>
+     * and id >1
+     * </otherwise>
+     * </choose>
+     * </where>
+     * </select>
+     */
 }

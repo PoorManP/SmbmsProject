@@ -54,5 +54,36 @@
 <!--        delete  from smbms_provider wehre ???-->
 <!--    </delete>-->
 
+    <select id="getProviderLimit" resultType="com.liujie.model.SmbmsProviderModel">
+        select procode,proname,procontact,prophone from smbms_provider
+
+
+        <where>
+
+            <choose>
+                <when test="proName.length!=0 and proName[0]!=null">
+                proName in
+                    <foreach collection="proName" item="proName" separator="," open="(" close=")">
+                    proName  not like concat('%',#{proName},'%')
+                </foreach>
+                </when>
+                
+                <when test="proContact.length!=0 and proName[0]!=null">
+                    proContact in
+                    <foreach collection="proContact" item="proContact" separator="," open="(" close=")">
+                        proContact  not like concat('%',#{proContact},'%')
+                    </foreach>
+                </when>
+                <when test="proPhone.length!=0">
+                    proPhone like concat('%',#{proPhone[0]},'%') or
+                    proPhone like concat('%',#{proPhone[1]},'%') or
+                    proPhone like concat('%',#{proPhone[2]},'%')
+                </when>
+            </choose>
+        </where>
+        order by id desc
+
+      limit 0,3;
+    </select>
 
 </mapper>

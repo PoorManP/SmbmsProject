@@ -23,4 +23,6 @@ public interface SmbmsBillMapper {
 
 
     List<SmbmsBill> test(String productName);
+
+    List<SmbmsBill> queryByName(String pname);
 }

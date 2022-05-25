@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liujie.dao.SmbmsProvider">
+<!--    namespace一定是相应接口的全限定名称-->
+<!--    select 标签是查询用的 id属性值是用来指定方法名称-->
+<!--    resulttype 指定返回值类型 int float-->
+<!--    封装成对象的依据  根据你的查询出来的列和返回值对象的属性名进行赋值-->
+    <select id="queryFrist" resultType="com.liujie.model.SmbmsProviderModel">
+            select * from smbms_provider;
+    </select>
+
+    <select id="queryById" resultType="com.liujie.model.SmbmsProviderModel">
+        select * from smbms_provider where id = #{id}
+     </select>
+
+<!--    id是接口方法名  update返回更新行数-->
+    <update id="updateById">
+        update smbms_provider set proPhone = #{proPhone} where id = #{id}
+    </update>
+
+<!--   默认返回插入的行数int-->
+    <insert id="insertProvider">
+        insert into smbms_provider(
+                                    proCode,
+                                    proName,
+                                    proDesc,
+                                    proContact,
+                                    proPhone,
+                                    proAddress,
+                                    proFax,
+                                    createdBy,
+                                    creationDate,
+                                    modifyDate,
+                                    modifyBy
+                                    )values (
+
+                                    #{proCode},
+                                    #{proName},
+                                    #{proDesc},
+                                    #{proContact},
+                                    #{proPhone},
+                                    #{proAddress},
+                                    #{proFax},
+                                    #{createdBy},
+                                    #{creationDate},
+                                    #{modifyDate},
+                                    #{modifyBy}
+                                    )
+    </insert>
+<!--    -->
+<!--    <delete id="deleteById">-->
+<!--        delete  from smbms_provider wehre ???-->
+<!--    </delete>-->
+
+    <select id="getProviderLimit" resultType="com.liujie.model.SmbmsProviderModel">
+        select procode,proname,procontact,prophone from smbms_provider
+
+
+        <where>
+
+            <choose>
+                <when test="proName.length!=0 and proName[0]!=null">
+                proName in
+                    <foreach collection="proName" item="proName" separator="," open="(" close=")">
+                    proName  not like concat('%',#{proName},'%')
+                </foreach>
+                </when>
+                
+                <when test="proContact.length!=0 and proName[0]!=null">
+                    proContact in
+                    <foreach collection="proContact" item="proContact" separator="," open="(" close=")">
+                        proContact  not like concat('%',#{proContact},'%')
+                    </foreach>
+                </when>
+                <when test="proPhone.length!=0">
+                    proPhone like concat('%',#{proPhone[0]},'%') or
+                    proPhone like concat('%',#{proPhone[1]},'%') or
+                    proPhone like concat('%',#{proPhone[2]},'%')
+                </when>
+            </choose>
+        </where>
+        order by id desc
+
+      limit 0,3;
+    </select>
+
+</mapper>

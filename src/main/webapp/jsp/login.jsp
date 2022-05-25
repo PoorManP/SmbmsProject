@@ -28,9 +28,10 @@
         })
 
         function login() {
-            if ($.trim($("#userCode").val() == "") || $("#userPassword").val() == "") {
-                alert("账号或者密码不能为空")
-                return false
+
+            if($("#userCode").val()=="" || $("#userPassword").val()==""){
+                alert("账号或密码为空")
+                return
             }
             $.ajax({
                 type: "post",

@@ -3,7 +3,7 @@
     <div class="right">
         <img class="wColck" src="${pageContext.request.contextPath }/statics/images/clock.jpg" alt=""/>
         <div class="wFont">
-            <h2>${userSession.userName }</h2>
+            <h2>${user.userName }</h2>
             <p>欢迎${user.userCode}来到超市订单管理系统!</p>
         </div>
     </div>

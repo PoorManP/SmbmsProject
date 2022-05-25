@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liujie.dao.SmbmsUserMapper">
   <resultMap id="BaseResultMap" type="com.liujie.model.SmbmsUser">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="userCode" jdbcType="VARCHAR" property="userCode" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
     <result column="userPassword" jdbcType="VARCHAR" property="userPassword" />
@@ -10,10 +10,10 @@
     <result column="birthday" jdbcType="DATE" property="birthDay" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="userRole" jdbcType="BIGINT" property="userRole" />
-    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="userRole" jdbcType="VARCHAR" property="userRole" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdBy" />
     <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
-    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyBy" jdbcType="VARCHAR" property="modifyBy" />
     <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
   </resultMap>
 
@@ -62,23 +62,23 @@
     select 
     <include refid="Base_Column_List" />
     from smbms_user
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from smbms_user
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.liujie.model.SmbmsUser">
-    insert into smbms_user (id, userCode, userName, 
+    insert into smbms_user (userCode, userName,
       userPassword, gender, birthday, 
       phone, address, userRole, 
       createdBy, creationDate, modifyBy, 
       modifyDate)
-    values (#{id,jdbcType=BIGINT}, #{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{userpassword,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
-      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userrole,jdbcType=BIGINT}, 
-      #{createdby,jdbcType=BIGINT}, #{creationdate,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=BIGINT}, 
-      #{modifydate,jdbcType=TIMESTAMP})
+    values (#{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+      #{userPassword,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{birthDay,jdbcType=DATE},
+      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR},
+      #{createdBy,jdbcType=VARCHAR}, #{creationDate,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR},
+      #{modifyDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.liujie.model.SmbmsUser">
     insert into smbms_user
@@ -125,7 +125,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="usercode != null">
         #{usercode,jdbcType=VARCHAR},
@@ -149,16 +149,16 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="userrole != null">
-        #{userrole,jdbcType=BIGINT},
+        #{userrole,jdbcType=VARCHAR},
       </if>
       <if test="createdby != null">
-        #{createdby,jdbcType=BIGINT},
+        #{createdby,jdbcType=VARCHAR},
       </if>
       <if test="creationdate != null">
         #{creationdate,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyby != null">
-        #{modifyby,jdbcType=BIGINT},
+        #{modifyby,jdbcType=VARCHAR},
       </if>
       <if test="modifydate != null">
         #{modifydate,jdbcType=TIMESTAMP},
@@ -190,22 +190,22 @@
         address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="userrole != null">
-        userRole = #{userrole,jdbcType=BIGINT},
+        userRole = #{userrole,jdbcType=VARCHAR},
       </if>
       <if test="createdby != null">
-        createdBy = #{createdby,jdbcType=BIGINT},
+        createdBy = #{createdby,jdbcType=VARCHAR},
       </if>
       <if test="creationdate != null">
         creationDate = #{creationdate,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyby != null">
-        modifyBy = #{modifyby,jdbcType=BIGINT},
+        modifyBy = #{modifyby,jdbcType=VARCHAR},
       </if>
       <if test="modifydate != null">
         modifyDate = #{modifydate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.liujie.model.SmbmsUser">
     update smbms_user
@@ -216,12 +216,12 @@
       birthday = #{birthday,jdbcType=DATE},
       phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      userRole = #{userrole,jdbcType=BIGINT},
-      createdBy = #{createdby,jdbcType=BIGINT},
+      userRole = #{userrole,jdbcType=VARCHAR},
+      createdBy = #{createdby,jdbcType=VARCHAR},
       creationDate = #{creationdate,jdbcType=TIMESTAMP},
-      modifyBy = #{modifyby,jdbcType=BIGINT},
+      modifyBy = #{modifyby,jdbcType=VARCHAR},
       modifyDate = #{modifydate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 
   <select id="selectByIds" resultType="com.liujie.model.SmbmsUser">
@@ -236,5 +236,35 @@
 
   <select id="login" resultType="com.liujie.model.SmbmsUser">
     select  * from smbms_user where userCode = #{userCode} and userPassword = #{userPassword}
+  </select>
+
+  <select id="pageList" resultType="com.liujie.model.SmbmsUser">
+    select u.id,u.userCode,u.userName,u.birthday,u.gender,u.phone,r.roleName as userRoleName  from smbms_user u join
+    smbms_role r on u.userRole = r.id
+    <where>
+      <if test="name!=null and name !=''">
+        u.userName like '%' #{name} '%'
+      </if>
+
+      <if test="queryUserRole!=null and queryUserRole !=''">
+        and r.id like '%' #{queryUserRole}
+      </if>
+    </where>
+    order by u.id desc
+    limit #{skipCount},#{pageSize}
+  </select>
+  
+  <select id="totalCount" resultType="int">
+    select count(*)  from smbms_user u join
+    smbms_role r on u.userRole = r.id
+    <where>
+      <if test="name!=null and name !=''">
+        u.userName like '%' #{name} '%'
+      </if>
+
+      <if test="queryUserRole!=null and queryUserRole !=''">
+        and r.roleName like '%' #{queryUserRole}
+      </if>
+    </where>
   </select>
 </mapper>

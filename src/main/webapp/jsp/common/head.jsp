@@ -15,6 +15,12 @@
     <title>超市订单管理系统</title>
     <link type="text/css" rel="stylesheet" href="statics/css/style.css" />
     <link type="text/css" rel="stylesheet" href="statics/css/public.css" />
+
+    <link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+    <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+    <script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
+
+
 </head>
 <body>
 <!--头部-->
@@ -38,7 +44,7 @@
              <ul class="list">
                  <li ><a href="jsp/bill.do?method=query">订单管理</a></li>
               <li><a href="jsp/provider.do?method=query">供应商管理</a></li>
-              <li><a href="jsp/user.do?method=query">用户管理</a></li>
+              <li><a href="jsp/userlist.jsp">用户管理</a></li>
               <li><a href="jsp/pwdmodify.jsp">密码修改</a></li>
               <li><a href="jsp/logout.do">退出系统</a></li>
              </ul>
@@ -46,4 +52,3 @@
      </div>
      <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath}"/>
      <input type="hidden" id="referer" name="referer" value="<%=request.getHeader("Referer")%>"/>
- </section>

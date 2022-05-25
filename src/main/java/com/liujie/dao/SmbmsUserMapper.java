@@ -1,6 +1,7 @@
 package com.liujie.dao;
 
 import com.liujie.model.SmbmsUser;
+import com.liujie.vo.Page;
 
 import java.util.List;
 
@@ -22,6 +23,10 @@ public interface SmbmsUserMapper {
     List<SmbmsUser> selectByIds(String[] id);
 
     SmbmsUser login(SmbmsUser user);
+
+    List<SmbmsUser> pageList(Page page);
+
+    int totalCount();
 
     /**
      * <select id="listProduct" resultType="Product">

@@ -1,10 +1,9 @@
 package com.liujie.model;
 
-import java.util.Date;
-import java.util.List;
+
 
 public class SmbmsUser {
-    private Long id;
+    private String id;
 
     private String userCode;
 
@@ -12,34 +11,32 @@ public class SmbmsUser {
 
     private String userPassword;
 
+    private Integer age;
+    
     private Integer gender;
 
-    private Date birthDay;
-
+    private String birthDay;
     private String phone;
 
     private String address;
 
-    private Long userRole;
+    private String userRole;
 
-    private Long createdBy;
+    private String createdBy;
 
-    private Date creationDate;
+    private String creationDate;
 
-    private Long modifyBy;
+    private String modifyBy;
 
-    private Date modifyDate;
+    private String modifyDate;
 
-    private List<SmbmsAddress> listAddress;
+    private String userRoleName;
 
-    public SmbmsUser() {
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,6 +46,27 @@ public class SmbmsUser {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
+    }
+
+    @Override
+    public String toString() {
+        return "SmbmsUser{" +
+                "id='" + id + '\'' +
+                ", userCode='" + userCode + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", age=" + age +
+                ", gender=" + gender +
+                ", birthDay='" + birthDay + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", userRole='" + userRole + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", modifyBy='" + modifyBy + '\'' +
+                ", modifyDate='" + modifyDate + '\'' +
+                ", userRoleName='" + userRoleName + '\'' +
+                '}';
     }
 
     public String getUserName() {
@@ -67,6 +85,14 @@ public class SmbmsUser {
         this.userPassword = userPassword;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public Integer getGender() {
         return gender;
     }
@@ -75,11 +101,11 @@ public class SmbmsUser {
         this.gender = gender;
     }
 
-    public Date getBirthDay() {
+    public String getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(String birthDay) {
         this.birthDay = birthDay;
     }
 
@@ -99,71 +125,51 @@ public class SmbmsUser {
         this.address = address;
     }
 
-    public Long getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(Long userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 
-    public Long getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Long getModifyBy() {
+    public String getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(Long modifyBy) {
+    public void setModifyBy(String modifyBy) {
         this.modifyBy = modifyBy;
     }
 
-    public Date getModifyDate() {
+    public String getModifyDate() {
         return modifyDate;
     }
 
-    public void setModifyDate(Date modifyDate) {
+    public void setModifyDate(String modifyDate) {
         this.modifyDate = modifyDate;
     }
 
-    public List<SmbmsAddress> getListAddress() {
-        return listAddress;
+    public String getUserRoleName() {
+        return userRoleName;
     }
 
-    public void setListAddress(List<SmbmsAddress> listAddress) {
-        this.listAddress = listAddress;
-    }
-
-    @Override
-    public String toString() {
-        return "SmbmsUser{" +
-                "id=" + id +
-                ", userCode='" + userCode + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", gender=" + gender +
-                ", birthDay=" + birthDay +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", userRole=" + userRole +
-                ", createdBy=" + createdBy +
-                ", creationDate=" + creationDate +
-                ", modifyBy=" + modifyBy +
-                ", modifyDate=" + modifyDate +
-                ", listAddress=" + listAddress +
-                '}';
+    public void setUserRoleName(String userRoleName) {
+        this.userRoleName = userRoleName;
     }
 }

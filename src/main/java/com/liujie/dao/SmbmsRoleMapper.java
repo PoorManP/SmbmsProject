@@ -2,6 +2,8 @@ package com.liujie.dao;
 
 import com.liujie.model.SmbmsRole;
 
+import java.util.List;
+
 public interface SmbmsRoleMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface SmbmsRoleMapper {
     int updateByPrimaryKeySelective(SmbmsRole record);
 
     int updateByPrimaryKey(SmbmsRole record);
+
+    List<SmbmsRole> queryList();
 }

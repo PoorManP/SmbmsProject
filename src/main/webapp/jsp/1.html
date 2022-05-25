@@ -1,0 +1,35 @@
+
+<html>
+<head>
+    <title>Title</title>
+
+
+    <script>
+        $(function () {
+
+            $('#userPageBarPage').bs_pagination({
+                currentPage: 1, // 页码
+                rowsPerPage: 3, // 每页显示的记录条数
+                maxRowsPerPage: 4, // 每页最多显示的记录条数
+                totalPages: 10, // 总页数
+                totalRows: 20, // 总记录条数
+
+                visiblePageLinks: 3, // 显示几个卡片
+
+                showGoToPage: true,
+                showRowsPerPage: true,
+                showRowsInfo: true,
+                showRowsDefaultInfo: true,
+
+                onChangePage: function (event, data) {
+                    pageList(data.currentPage, data.rowsPerPage);
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div id="userPageBarPage"></div>
+</body>
+</html>

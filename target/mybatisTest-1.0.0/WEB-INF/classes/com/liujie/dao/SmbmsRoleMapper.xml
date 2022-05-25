@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liujie.dao.SmbmsRoleMapper">
   <resultMap id="BaseResultMap" type="com.liujie.model.SmbmsRole">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="roleCode" jdbcType="VARCHAR" property="roleCode" />
     <result column="roleName" jdbcType="VARCHAR" property="roleName" />
     <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
@@ -114,4 +114,8 @@
       modifyDate = #{modifydate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="queryList" resultType="com.liujie.model.SmbmsRole">
+        select * from smbms_role
+  </select>
 </mapper>

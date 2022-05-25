@@ -15,4 +15,8 @@ public interface SmbmsUserService {
     Map<String, Object> deleteById(String id);
 
     Map<String, Object> addUser(SmbmsUser user);
+
+    SmbmsUser queryById(Integer id);
+
+    Map<String, Object> update(SmbmsUser user);
 }

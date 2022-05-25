@@ -9,6 +9,7 @@ import com.liujie.utils.UUIDUtil;
 import com.liujie.vo.Page;
 import com.liujie.vo.PaginationVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,6 +106,23 @@ public class WebController {
 
         return map;
 
+    }
+
+    @RequestMapping(value = "userInfo.do")
+    @ResponseBody
+    public SmbmsUser userInfo(Integer id) {
+        SmbmsUser user = userService.queryById(id);
+        return user;
+    }
+
+    @RequestMapping(value = "/updateUser.do")
+    @ResponseBody
+    public Map<String, Object> updateUser(SmbmsUser user) {
+
+        System.out.println(user);
+        Map<String, Object> map = userService.update(user);
+
+        return map;
     }
 
 }

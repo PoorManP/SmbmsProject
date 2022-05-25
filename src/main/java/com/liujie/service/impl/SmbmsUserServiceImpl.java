@@ -38,7 +38,12 @@ public class SmbmsUserServiceImpl implements SmbmsUserService {
         List<SmbmsUser> list = userMapper.pageList(page);
         Date date = new Date();
         list.forEach(l->{
-            l.setAge(Integer.parseInt(DateTimeUtil.getSysTime().substring(0,4))-Integer.parseInt(l.getBirthDay().substring(0,4)));
+            if(l.getBirthDay()!=null){
+                l.setAge(Integer.parseInt(DateTimeUtil.getSysTime().substring(0,4))-Integer.parseInt(l.getBirthDay().substring(0,4)));
+            }else {
+                l.setAge(0);
+            }
+
         });
         PaginationVo<SmbmsUser> smbmsUserPaginationVo = new PaginationVo<>();
 
@@ -85,9 +90,31 @@ public class SmbmsUserServiceImpl implements SmbmsUserService {
 
         return map;
 
+    }
 
+    @Override
+    public SmbmsUser queryById(Integer id) {
+        SmbmsUser user = userMapper.queryById(id);
 
+        if (user != null) {
+            return user;
+        }
 
+        return null;
+    }
 
+    @Override
+    public Map<String, Object> update(SmbmsUser user) {
+        int i = userMapper.updateByPrimaryKey(user);
+
+        HashMap<String,Object> map  = new HashMap<>();
+
+        if (i != 1) {
+            map.put("success", false);
+        }else {
+            map.put("success", true);
+        }
+
+        return map;
     }
 }

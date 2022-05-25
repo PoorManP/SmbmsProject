@@ -28,6 +28,8 @@ public interface SmbmsUserMapper {
 
     int totalCount();
 
+    SmbmsUser queryById(Integer id);
+
     /**
      * <select id="listProduct" resultType="Product">
      * SELECT * FROM product_

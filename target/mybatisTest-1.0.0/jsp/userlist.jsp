@@ -8,6 +8,7 @@
       rel="stylesheet"/>
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <%--<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>--%>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript"
@@ -18,18 +19,88 @@
 <script type="text/javascript" src="jquery/bs_pagination/en.js"></script>
 <script>
     $(function () {
-        pageList(1,6)
 
+        $(".time").datetimepicker({
+            minView: "month",
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "bottom-left"
+        });
+        pageList(1, 6)
 
         $("#submitBtn").keydown(function (even) {
-            if(even.keyCode==13){
-                pageList(1,6)
+            if (even.keyCode == 13) {
+                pageList(1, 6)
             }
         })
         $("#submitBtn").click(function () {
-            pageList(1,6);
+            pageList(1, 6);
         })
+
+
+        $("#updateBtn").click(function () {
+            if (confirm("确认修改用户信息!")) {
+                $.ajax({
+                    url: "updateUser.do",
+                    dataType: "json",
+                    type: "post",
+                    data: {
+                        "id": $("#editId").val(),
+                        "birthDay": $("#editBirthDay").val(),
+                        "gender": $("#editGender").val(),
+                        "phone": $("#editPhone").val(),
+                        "userCode": $("#editUserCode").val(),
+                        "userName": $("#editUserName").val(),
+                        "userRole": $("#editUserRole").val()
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert("更新用户成功")
+
+                            $("#editUserForm")[0].reset()
+
+                            pageList(1,
+                                $("#userPageBarPage").bs_pagination('getOption', 'rowsPerPage'));
+
+                            $("#editUserModal").modal("hide")
+
+
+                        } else {
+                            alert("更新用户失败")
+                        }
+                    }
+                })
+            }
+        })
+
     })
+
+
+    function editUser(id) {
+
+        $.ajax({
+            url: "userInfo.do",
+            type: "get",
+            dataType: "json",
+            data: {
+                "id": id
+            },
+            success: function (response) {
+                $("#editId").val(response.id)
+                $("#editBirthDay").val(response.birthDay)
+                $("#editGender").val(response.gender)
+                $("#editPhone").val(response.phone)
+                $("#editUserCode").val(response.userCode)
+                $("#editUserName").val(response.userName)
+                $("#editUserRole").val(response.userRole)
+
+                $("#editUserModal").modal("show")
+            }
+        })
+
+    }
 
     function pageList(pageNo, pageSize) {
         //
@@ -69,9 +140,9 @@
                     html += '</td>'
                     html += '<td>'
 
-                    html +='<span><a class="viewUser" href="javascript:;" userid='+n.id+' username='+n.userName+'><img src="statics/images/read.png" alt="查看" title="查看"/></a></span>'
-                    html +='<span><a class="modifyUser" href="javascript:;" userid='+n.id+' username='+n.userName+'><img src="statics/images/xiugai.png" alt="修改" title="修改"/></a></span>'
-                    html +='<span><a class="deleteUser" href="javascript:;"><img src="statics/images/schu.png" alt="删除" title="删除" onclick="deleUser('+n.id+')"/></a></span>'
+                    html += '<span><a class="viewUser" href="javascript:;" userid=' + n.id + ' username=' + n.userName + '><img src="statics/images/read.png" alt="查看" title="查看"/></a></span>'
+                    html += '<span><a class="modifyUser" href="javascript:;" userid=' + n.id + ' username=' + n.userName + '><img src="statics/images/xiugai.png" onclick="editUser(' + n.id + ')" alt="修改" title="修改"/></a></span>'
+                    html += '<span><a class="deleteUser" href="javascript:;"><img src="statics/images/schu.png" alt="删除" title="删除" onclick="deleUser(' + n.id + ')"/></a></span>'
 
                 });
 
@@ -103,21 +174,22 @@
             }
         });
     }
-    function deleUser(id,userName) {
 
-        if (confirm('你确定要删除'+userName+'用户吗?')){
+    function deleUser(id, userName) {
+
+        if (confirm('你确定要删除' + userName + '用户吗?')) {
             $.ajax({
-                url:"delUser.do",
+                url: "delUser.do",
                 dataType: "json",
-                type:"get",
-                data:{
-                    "id":id
+                type: "get",
+                data: {
+                    "id": id
                 },
-                success:function (response) {
-                    if(response.success){
+                success: function (response) {
+                    if (response.success) {
                         pageList(1
-                            ,$("#userPageBarPage").bs_pagination('getOption','rowsPerPage'));
-                    }else{
+                            , $("#userPageBarPage").bs_pagination('getOption', 'rowsPerPage'));
+                    } else {
                         alert("删除失败")
                     }
 
@@ -138,11 +210,11 @@
             <input name="queryname" id="queryname" class="input-text" type="text">
             <span>用户角色：</span>
             <select name="queryUserRole" id="queryUserRole">
-                    <option value="">--请选择--</option>
-                    <c:forEach var="r" items="${roleList}">
-                        <option
-                                value="${r.id}">${r.roleName}</option>
-                    </c:forEach>
+                <option value="">--请选择--</option>
+                <c:forEach var="r" items="${roleList}">
+                    <option
+                            value="${r.id}">${r.roleName}</option>
+                </c:forEach>
             </select>
 
             <input value="查 询" type="button" id="submitBtn">
@@ -173,19 +245,78 @@
     </div>
 </div>
 </section>
+<div class="modal fade" id="editUserModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">修改用户页面</h4>
+            </div>
+            <div class="modal-body">
 
-<!--点击删除按钮后弹出的页面-->
-<div class="zhezhao"></div>
-<div class="remove" id="removeUse">
-    <div class="removerChid">
-        <h2>提示</h2>
-        <div class="removeMain">
-            <p>你确定要删除该用户吗？</p>
-            <a href="#" id="yes">确定</a>
-            <a href="#" id="no">取消</a>
+                <form class="form-horizontal" role="form" id="editUserForm">
+
+                    <input type="hidden" name="" id="editId">
+                    <div class="form-group">
+                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">用户编码<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="editUserCode" value="">
+                        </div>
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">用户名称<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="editUserName" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-startTime" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <select name="gender" form-control id="editGender" style="width: 100%">
+                                <option value="1" selected="selected">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                        <label for="edit-endTime" class="col-sm-2 control-label">出生日期</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control time" id="editBirthDay" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-cost" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="editPhone" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-describe" class="col-sm-2 control-label">描述</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <select name="queryUserRole" class="form-control" id="editUserRole">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="r" items="${roleList}">
+                                    <option
+                                            value="${r.id}">${r.roleName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="updateBtn">更新</button>
+            </div>
         </div>
     </div>
 </div>
+
+<!--点击删除按钮后弹出的页面-->
 
 <%@include file="/jsp/common/foot.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/userlist.js"></script>

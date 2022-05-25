@@ -58,11 +58,11 @@
     id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, 
     createdBy, creationDate, modifyBy, modifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from smbms_user
-    where id = #{id,jdbcType=VARCHAR}
+
+<!--  query user info -->
+
+  <select id="queryById" resultType="com.liujie.model.SmbmsUser">
+    select * from smbms_user where id = #{id};
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from smbms_user
@@ -209,18 +209,18 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.liujie.model.SmbmsUser">
     update smbms_user
-    set userCode = #{usercode,jdbcType=VARCHAR},
-      userName = #{username,jdbcType=VARCHAR},
-      userPassword = #{userpassword,jdbcType=VARCHAR},
+    set userCode = #{userCode,jdbcType=VARCHAR},
+      userName = #{userName,jdbcType=VARCHAR},
+      userPassword = #{userPassword,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=DATE},
+      birthday = #{birthDay,jdbcType=DATE},
       phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      userRole = #{userrole,jdbcType=VARCHAR},
-      createdBy = #{createdby,jdbcType=VARCHAR},
-      creationDate = #{creationdate,jdbcType=TIMESTAMP},
-      modifyBy = #{modifyby,jdbcType=VARCHAR},
-      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+      userRole = #{userRole,jdbcType=VARCHAR},
+      createdBy = #{createdBy,jdbcType=VARCHAR},
+      creationDate = #{creationDate,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyBy,jdbcType=VARCHAR},
+      modifyDate = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 

@@ -43,7 +43,7 @@
         $("#updateBtn").click(function () {
             if (confirm("确认修改用户信息!")) {
                 $.ajax({
-                    url: "updateUser.do",
+                    url: "user/updateUser.do",
                     dataType: "json",
                     type: "post",
                     data: {
@@ -81,7 +81,7 @@
     function editUser(id) {
 
         $.ajax({
-            url: "userInfo.do",
+            url: "user/userInfo.do",
             type: "get",
             dataType: "json",
             data: {
@@ -106,7 +106,7 @@
         //
         $.ajax({
 
-            url: "pageList.do",
+            url: "user/pageList.do",
             type: "get",
             data: {
                 "pageNo": pageNo,
@@ -179,7 +179,7 @@
 
         if (confirm('你确定要删除' + userName + '用户吗?')) {
             $.ajax({
-                url: "delUser.do",
+                url: "user/elUser.do",
                 dataType: "json",
                 type: "get",
                 data: {

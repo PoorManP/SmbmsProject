@@ -9,7 +9,7 @@
 
         $("#add").click(function () {
             $.ajax({
-                url:"addUser.do",
+                url:"user/addUser.do",
                 type:"get",
                 dataType:"json",
                 data:{

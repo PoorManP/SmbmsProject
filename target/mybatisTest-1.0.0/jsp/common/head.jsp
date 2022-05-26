@@ -46,7 +46,7 @@
               <li><a href="jsp/provider.do?method=query">供应商管理</a></li>
               <li><a href="jsp/userlist.jsp">用户管理</a></li>
               <li><a href="jsp/pwdmodify.jsp">密码修改</a></li>
-              <li><a href="jsp/logout.do">退出系统</a></li>
+              <li><a href="logout.do">退出系统</a></li>
              </ul>
          </nav>
      </div>

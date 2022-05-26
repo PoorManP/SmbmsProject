@@ -37,5 +37,12 @@ public class WebController {
         return objectObjectHashMap;
     }
 
+    @RequestMapping(value = "/logout.do")
+    public String logout(HttpServletRequest request) {
+        request.getSession().setAttribute("user", null);
+
+        return "redirect:index.jsp";
+    }
+
 
 }

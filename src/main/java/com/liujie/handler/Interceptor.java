@@ -11,7 +11,7 @@ public class Interceptor implements HandlerInterceptor {
         String path = request.getServletPath();
 
 
-        if ("/login".equals(path) || "/login.jsp".equals(path)) {
+        if ("/login.do".equals(path) || "/login.jsp".equals(path)) {
             return true;
         }else {
             if (request.getSession().getAttribute("user") != null) {

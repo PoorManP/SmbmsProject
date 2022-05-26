@@ -142,7 +142,8 @@
 
                     html += '<span><a class="viewUser" href="javascript:;" userid=' + n.id + ' username=' + n.userName + '><img src="statics/images/read.png" alt="查看" title="查看"/></a></span>'
                     html += '<span><a class="modifyUser" href="javascript:;" userid=' + n.id + ' username=' + n.userName + '><img src="statics/images/xiugai.png" onclick="editUser(' + n.id + ')" alt="修改" title="修改"/></a></span>'
-                    html += '<span><a class="deleteUser" href="javascript:;"><img src="statics/images/schu.png" id="'+n.id+'" userName="'+n.userName+'" alt="删除" title="删除" onclick="deleUser(' + n.id + ')"/></a></span>'
+                    html += '<span><a class="deleteUser" href="javascript:;"><img src="statics/images/schu.png" id="'+n.id+'"   alt="删除" title="删除" onclick="deleUser(\''+n.id+'\',\''+n.userName+'\')"/></a></span>'
+
 
                 });
 
@@ -175,12 +176,12 @@
         });
     }
 
-    function deleUser(id) {
+    var id;
+    function deleUser(id,userName) {
 
-        var userName = $("#"+id).attr("userName")
         if (confirm('你确定要删除' + userName + '用户吗?')) {
             $.ajax({
-                url: "user/elUser.do",
+                url: "user/delUser.do",
                 dataType: "json",
                 type: "get",
                 data: {
@@ -240,7 +241,6 @@
         </tbody>
 
     </table>
-    <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
     <div class="page-bar" id="userPageBarPage">
 
     </div>
@@ -320,4 +320,3 @@
 <!--点击删除按钮后弹出的页面-->
 
 <%@include file="/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/userlist.js"></script>

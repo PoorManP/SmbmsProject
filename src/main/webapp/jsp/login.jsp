@@ -35,7 +35,7 @@
             }
             $.ajax({
                 type: "post",
-                url: "login",
+                url: "login.do",
                 dataType: "json",
                 data: {
                     "userCode": $.trim($("#userCode").val()),

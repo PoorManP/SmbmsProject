@@ -25,7 +25,7 @@ public class WebController {
     @Resource
     SmbmsUserService userService;
 
-    @RequestMapping("/login")
+    @RequestMapping("/login.do")
     @ResponseBody
     public Map<String, Object> login(HttpServletRequest request, SmbmsUser user) throws LoginExcetion {
 

@@ -142,7 +142,7 @@
 
                     html += '<span><a class="viewUser" href="javascript:;" userid=' + n.id + ' username=' + n.userName + '><img src="statics/images/read.png" alt="查看" title="查看"/></a></span>'
                     html += '<span><a class="modifyUser" href="javascript:;" userid=' + n.id + ' username=' + n.userName + '><img src="statics/images/xiugai.png" onclick="editUser(' + n.id + ')" alt="修改" title="修改"/></a></span>'
-                    html += '<span><a class="deleteUser" href="javascript:;"><img src="statics/images/schu.png" alt="删除" title="删除" onclick="deleUser(' + n.id + ')"/></a></span>'
+                    html += '<span><a class="deleteUser" href="javascript:;"><img src="statics/images/schu.png" id="'+n.id+'" userName="'+n.userName+'" alt="删除" title="删除" onclick="deleUser(' + n.id + ')"/></a></span>'
 
                 });
 
@@ -175,8 +175,9 @@
         });
     }
 
-    function deleUser(id, userName) {
+    function deleUser(id) {
 
+        var userName = $("#"+id).attr("userName")
         if (confirm('你确定要删除' + userName + '用户吗?')) {
             $.ajax({
                 url: "user/elUser.do",
